@@ -13,6 +13,8 @@ RUN apt-get install -y nodejs
 
 COPY ./ /agones-client
 
+RUN cd /agones-client && npm install
+
 USER steam
 
 ENTRYPOINT node /agones-client/index.js
