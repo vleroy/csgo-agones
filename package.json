@@ -1,0 +1,11 @@
+{
+  "name": "csgo-agones",
+  "version": "0.0.1",
+  "description": "CSGO server running with agones sidecar",
+  "main": "index.js",
+  "author": "vleroy",
+  "license": "MIT",
+  "dependencies": {
+    "@google-cloud/agones-sdk": "^1.17.0"
+  }
+}
