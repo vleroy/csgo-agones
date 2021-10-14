@@ -25,10 +25,11 @@ async function main() {
     // Récupération des infos de l'instance
     const gameServerInfos = await agonesSDK.getGameServer()
     const ip = gameServerInfos.status.address
-    const port = gameServerInfos.status.port
-    console.log(gameServerInfos.status)
+    const port = gameServerInfos.status.portsList.find((p) => (p.name === 'game')).port
+    const portTv = gameServerInfos.status.portsList.find((p) => (p.name === 'gotv')).port
     exec('export IP=' + ip)
     exec('export PORT=' + port)
+    exec('export TV_PORT=' + portTv)
 
     console.log(SIDECAR_PREFIX + '...Agones environment configured')
 
