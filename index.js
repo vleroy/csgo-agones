@@ -1,12 +1,11 @@
-const spawn = require('child_process').spawn;
-const exec = require('child_process').exec;
-const AgonesSDK = require('@google-cloud/agones-sdk');
-const os = require("os");
+const spawn = require('child_process').spawn
+const exec = require('child_process').exec
+const AgonesSDK = require('@google-cloud/agones-sdk')
 
 const SIDECAR_PREFIX = 'AGONES | '
 const CSGO_PREFIX    = 'SERVER | '
 
-const READY_LOG_MESSAGE = 'Could not establish connection to Steam servers.'
+const READY_LOG_MESSAGE = 'Host_NewGame on map'
 
 let isReady = false
 let agonesSDK = new AgonesSDK()
@@ -33,8 +32,8 @@ async function main() {
     console.log(SIDECAR_PREFIX + '...Agones environment configured')
 
     // Démarrer le serveur CSGO
-    console.log(SIDECAR_PREFIX + 'Starting CSGO server...')
-    const child = spawn(process.env.STEAM_DIR + '/start.sh');
+    console.log(SIDECAR_PREFIX + 'Starting CSGO server on ' + ip + ':' + port + '...')
+    const child = spawn(process.env.STEAM_DIR + '/start.sh')
 
     child.stdout.setEncoding('utf8');
     child.stdout.on('data', function(data) {
@@ -52,11 +51,11 @@ async function main() {
 
     child.stderr.setEncoding('utf8');
     child.stderr.on('data', function(data) {
-        console.log(CSGO_PREFIX + 'ERROR | ' + data);
+        console.log(CSGO_PREFIX + 'ERROR | ' + data)
     });
 
     child.on('close', function(code) {
-        console.log(CSGO_PREFIX + 'EXIT CODE | ' + code);
+        console.log(CSGO_PREFIX + 'EXIT CODE | ' + code)
     });
 
     // Faire des health checks en boucle
