@@ -1,5 +1,4 @@
 const spawn = require('child_process').spawn
-const exec = require('child_process').exec
 const AgonesSDK = require('@google-cloud/agones-sdk')
 
 const SIDECAR_PREFIX = 'AGONES | '
@@ -27,9 +26,9 @@ async function main() {
     const ip = gameServerInfos.status.address
     const port = gameServerInfos.status.portsList.find((p) => (p.name === 'game')).port
     const portTv = gameServerInfos.status.portsList.find((p) => (p.name === 'gotv')).port
-    exec('export IP=' + ip)
-    exec('export PORT=' + port)
-    exec('export TV_PORT=' + portTv)
+    process.env.IP = ip
+    process.env.PORT = port
+    process.env.TV_PORT = portTv
 
     console.log(SIDECAR_PREFIX + '...Agones environment configured')
 
