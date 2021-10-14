@@ -26,6 +26,7 @@ async function main() {
     const gameServerInfos = await agonesSDK.getGameServer()
     const ip = gameServerInfos.status.address
     const port = gameServerInfos.status.port
+    console.log(gameServerInfos.status)
     exec('export IP=' + ip)
     exec('export PORT=' + port)
 
